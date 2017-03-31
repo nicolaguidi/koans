@@ -30,8 +30,63 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # Your goal is to write the score method.
 
 def score(dice)
-  # You need to write this method
-  dice.inject(0) do
+  analysis = {
+    "1" => 0,
+    "2" => 0,
+    "3" => 0,
+    "4" => 0,
+    "5" => 0,
+    "6" => 0,
+    "7" => 0,
+    "8" => 0,
+    "9" => 0
+  }
+  result = []
+
+  dice.each do |roll|
+    case roll
+    when 1
+      analysis["1"]     += 1
+    when 2
+      analysis["2"]     += 1
+    when 3
+      analysis["3"]   += 1
+    when 4
+      analysis["4"]    += 1
+    when 5
+      analysis["5"]    += 1
+    when 6
+      analysis["6"]     += 1
+    when 7
+      analysis["7"]   += 1
+    when 8
+      analysis["8"]   += 1
+    when 9
+      analysis["9"]    += 1
+    end
+  end
+
+  analysis.each do |key, value|
+    case key
+    when "1"
+      if value >= 3
+        result << 1000 + (100 * (value % 3))
+      else
+        result << 100 * value
+      end
+    when "5"
+      if value < 3
+        result << 50 * value
+      else
+        result << 500 + (50 * (value % 3))
+      end
+    else
+      result << key.to_i * 100 if value == 3
+    end
+
+  end
+
+  result.inject(0) do
     |sum,x| sum + x
   end
 end
