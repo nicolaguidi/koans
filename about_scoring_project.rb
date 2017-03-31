@@ -83,7 +83,6 @@ def score(dice)
     else
       result << key.to_i * 100 if value == 3
     end
-
   end
 
   result.inject(0) do
